@@ -23,7 +23,6 @@ SRC_PATH  := src
 DBG_PATH  := dbg
 SAVE_PATH := save
 TEST_PATH := test
-SAVE_PATH := save
 
 
 # compile logic
@@ -38,7 +37,7 @@ TARGET_TEST := $(BIN_PATH)/$(TEST_PROGRAM)
 TARGET_DEBG := $(DBG_PATH)/$(DEBG_PROGRAM)
 
 COUNT_SAVE  := $(shell ls $(SAVE_PATH) -1 2>/dev/null | wc -l)
-TARGET_SAVE := $(SAVE)/$(MAIN_NAME)$(COUNT_SAVE)
+TARGET_SAVE := $(SAVE_PATH)/$(MAIN_PROGRAM)$(COUNT_SAVE)
 
 # source files
 MAIN_SRC := $(foreach x, $(SRC_PATH), $(wildcard $(addprefix $(x)/*,.c*)))
@@ -82,7 +81,7 @@ $(OBJ_PATH)/%.o: $(TEST_PATH)/%.c*
 # phony rules
 .PHONY: dir
 dir: 
-	@mkdir -p $(BIN_PATH) $(OBJ_PATH) $(SRC_PATH) $(DBG_PATH) $(SAVE_PATH) $(TEST_PATH) $(SAVE_PATH)
+	@mkdir -p $(BIN_PATH) $(OBJ_PATH) $(SRC_PATH) $(DBG_PATH) $(SAVE_PATH) $(TEST_PATH)
 
 .PHONY: main
 main: $(TARGET_MAIN)
