@@ -67,7 +67,7 @@ $(TARGET_MAIN): $(MAIN_OBJ)
 	$(CC) -o $@ $(MAIN_OBJ) $(CFLAGS)
 
 $(TARGET_TEST): $(TEST_OBJ)
-	$(CC) -o $@ $(TEST_OBJ) $(CFLAGS)
+	$(CC) -o $@ $(TEST_OBJ) $(DBGFLAGS) $(CFLAGS)
 
 $(TARGER_DEBUG): $(DEBG_OBJ)
 	$(CC) -o $@ $(DEBG_OBJ) $(DBGFLAGS) $(CFLAGS)
@@ -101,4 +101,3 @@ save: $(TARGET_MAIN)
 clean:
 	@echo CLEAN $(CLEAN_LIST)
 	rm -f $(CLEAN_LIST)
-
