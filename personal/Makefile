@@ -47,7 +47,7 @@ TEST_SRC += $(foreach x, $(TEST_PATH), $(wildcard $(addprefix $(x)/*,.c*)))
 # object files
 MAIN_OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(MAIN_SRC)))))
 TEST_OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(TEST_SRC)))))
-DEBG_OBJ := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(MAIN_SRC)))))
+DEBG_OBJ := $(addprefix $(DBG_PATH)/, $(addsuffix .o, $(notdir $(basename $(MAIN_SRC)))))
 
 
 # clean files list
@@ -73,10 +73,13 @@ $(TARGET_DEBG): $(DEBG_OBJ)
 	$(CC) -o $@ $(DEBG_OBJ) $(DBGFLAGS) $(CFLAGS)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c*
-	$(CC) $(COBJFLAGS) -o $@ $<
+	$(CC) -o $@ $< $(COBJFLAGS) 
+
+$(DBG_PATH)%.o: $(SRC_PATH)/%.c*
+	$(CC) -o $@ $< $(COBJFLAGS) $(DBGFLAGS)
 
 $(OBJ_PATH)/%.o: $(TEST_PATH)/%.c*
-	$(CC) $(COBJFLAGS) -o $@ $<
+	$(CC) -o $@ $< $(COBJFLAGS) $(DBGFLAGS)
 
 # phony rules
 .PHONY: dir
